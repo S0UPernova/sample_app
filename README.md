@@ -37,12 +37,27 @@ $ rails server
 For more information, see the
 [*Ruby on Rails Turtorial* book](https://www.railstutorial.org/book)
 
-
-
+___
 ## Some added bits
 ### some issues and curiosities I found while working through this book
 ___
 
+## From chapter 3.1, Listing 3.5
+This doesn't work
+-
+```
+def hello
+    render text: "hello, world!"
+end
+```
+so I used this insted  
+-
+```
+def hello
+    render html: "hello, world!"
+end
+```
+---
 ## From chapter 3.3, Listing 3.15.
 ### these commands do not seem to run the tests.
 ```
@@ -74,3 +89,17 @@ Finished in 22.024436s, 0.0908 runs/s, 0.0908 assertions/s.
 ```
 ### I don't really know why yet,
 when I find out maybe I'll edit this with the explanation.
+### it seems to be working with rails test, but I am not sure what changed 
+
+```
+$ rails test
+Running via Spring preloader in process 7191
+Run options: --seed 26433
+
+# Running:
+
+..
+
+Finished in 0.599964s, 3.3335 runs/s, 3.3335 assertions/s.
+2 runs, 2 assertions, 0 failures, 0 errors, 0 skips
+```
