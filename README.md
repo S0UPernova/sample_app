@@ -36,3 +36,41 @@ $ rails server
 ```
 For more information, see the
 [*Ruby on Rails Turtorial* book](https://www.railstutorial.org/book)
+
+
+
+## Some added bits
+### some issues and curiosities I found while working through this book
+___
+
+## From chapter 3.3, Listing 3.15.
+### these commands do not seem to run the tests.
+```
+$ rails db:migrate 
+$ rails test
+
+Running via Spring preloader in process 13471
+Run options: --seed 21150
+
+# Running:
+
+
+
+Finished in 0.004041s, 0.0000 runs/s, 0.0000 assertions/s.
+0 runs, 0 assertions, 0 failures, 0 errors, 0 skips
+```
+### but this command does.
+```
+$ rake test
+
+Run options: --seed 486
+
+# Running:
+
+..
+
+Finished in 22.024436s, 0.0908 runs/s, 0.0908 assertions/s.
+2 runs, 2 assertions, 0 failures, 0 errors, 0 skips
+```
+### I don't really know why yet,
+when I find out maybe I'll edit this with the explanation.
