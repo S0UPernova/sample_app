@@ -89,7 +89,9 @@ Finished in 22.024436s, 0.0908 runs/s, 0.0908 assertions/s.
 ```
 ### I don't really know why yet,
 when I find out maybe I'll edit this with the explanation.
-### it seems to be working with rails test, but I am not sure what changed 
+### it seems to be working with rails test, but I am not sure what changed
+Though I suspect it was due to the fact that I was using two terminals in vs code, and one of them was out of sync,
+because when I tried the other one it worked properly.
 
 ```
 $ rails test
