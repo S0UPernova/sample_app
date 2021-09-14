@@ -42,6 +42,8 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # added for testing, does not seem to be having an effect
+  gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
 end
 
 group :test do
@@ -51,8 +53,10 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   # Testing gems
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'minitest', '~> 5.14', '>= 5.14.4'
   gem 'minitest-reporters', '~> 1.4', '>= 1.4.3'
+  # does not seem to be having an effect      
   gem 'guard', '~> 2.18'
   gem 'guard-minitest', '~> 2.4', '>= 2.4.6'
 end
