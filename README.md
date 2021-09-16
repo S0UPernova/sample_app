@@ -40,7 +40,8 @@ For more information, see the
 ___
 ## Some added bits
 ### some issues and curiosities I found while working through this book
-___
+
+---
 
 ## From chapter 3.1, Listing 3.5
 This doesn't work
@@ -74,7 +75,9 @@ Run options: --seed 21150
 Finished in 0.004041s, 0.0000 runs/s, 0.0000 assertions/s.
 0 runs, 0 assertions, 0 failures, 0 errors, 0 skips
 ```
+
 ### but this command does.
+
 ```
 $ rake test
 
@@ -87,11 +90,15 @@ Run options: --seed 486
 Finished in 22.024436s, 0.0908 runs/s, 0.0908 assertions/s.
 2 runs, 2 assertions, 0 failures, 0 errors, 0 skips
 ```
-### I don't really know why yet,
-when I find out maybe I'll edit this with the explanation.
+---
+## I don't really know why yet,
+### when I find out maybe I'll edit this with the explanation. 
+
+<br>
+
 ### it seems to be working with rails test, but I am not sure what changed
-Though I suspect it was due to the fact that I was using two terminals in vs code, and one of them was out of sync,
-because when I tried the other one it worked properly.
+### Though I suspect it was due to the fact that I was using two terminals in vs code, and one of them was out of sync,
+### because when I tried the other one it worked properly.
 
 ```
 $ rails test
@@ -104,4 +111,16 @@ Run options: --seed 26433
 
 Finished in 0.599964s, 3.3335 runs/s, 3.3335 assertions/s.
 2 runs, 2 assertions, 0 failures, 0 errors, 0 skips
+```
+---
+
+
+## From chapter 5 listing 5.4
+### this command does not work because the link is no longer correct
+```
+$ curl -o app/assets/images/kitten.jpg -OL https://cdn.lernenough.com/kitten.jpg
+```
+### This is with the current address as of 09/14/21
+```
+$ curl -o app/assets/images/kitten.jpg -OL https://learnenough.s3-us-west-2.amazonaws.com/kitten.jpg
 ```
