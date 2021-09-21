@@ -90,13 +90,13 @@ Run options: --seed 486
 Finished in 22.024436s, 0.0908 runs/s, 0.0908 assertions/s.
 2 runs, 2 assertions, 0 failures, 0 errors, 0 skips
 ```
----
 ## I don't really know why yet,
 ### when I find out maybe I'll edit this with the explanation. 
 
 <br>
 
-### it seems to be working with rails test, but I am not sure what changed
+---
+## it seems to be working with rails test, but I am not sure what changed
 ### Though I suspect it was due to the fact that I was using two terminals in vs code, and one of them was out of sync,
 ### because when I tried the other one it worked properly.
 
@@ -123,4 +123,25 @@ $ curl -o app/assets/images/kitten.jpg -OL https://cdn.lernenough.com/kitten.jpg
 ### This is with the current address as of 09/14/21
 ```
 $ curl -o app/assets/images/kitten.jpg -OL https://learnenough.s3-us-west-2.amazonaws.com/kitten.jpg
+```
+## From chapter 3.3, Listing 6.27
+### Missing curly brackets on email uniqueness.
+```
+class User < ApplicationRecord
+  validates :name, presence: true, length: { maximum: 50}
+  VALID_EMAIL_REGEX= /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: case_sensitive: false
+end
+```
+### This is what actually works
+```
+class User < ApplicationRecord
+  validates :name, presence: true, length: { maximum: 50}
+  VALID_EMAIL_REGEX= /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  validates :email, presence: true, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: {case_sensitive: false}
+end
 ```
