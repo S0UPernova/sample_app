@@ -124,6 +124,7 @@ $ curl -o app/assets/images/kitten.jpg -OL https://cdn.lernenough.com/kitten.jpg
 ```
 $ curl -o app/assets/images/kitten.jpg -OL https://learnenough.s3-us-west-2.amazonaws.com/kitten.jpg
 ```
+---
 ## From chapter 3.3, Listing 6.27
 ### Missing curly brackets on email uniqueness.
 ```
@@ -145,3 +146,38 @@ class User < ApplicationRecord
                     uniqueness: {case_sensitive: false}
 end
 ```
+---
+## From chapter 7 listing 7.2
+### There is an added space after the period in the first instance of the code, which seem to be
+### a typo but later references do not have it
+```
+/* miscellaneous */
+
+. debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+```
+### as you can see
+```
+.debug_dump {
+  •
+  •
+  •
+  @include box_sizing;
+}
+```
+```
+.debug_dump {
+  •
+  •
+  •
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+```
+---
