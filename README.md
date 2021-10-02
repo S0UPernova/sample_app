@@ -181,3 +181,28 @@ end
 }
 ```
 ---
+
+## From chapter 8.2 listing 8.20
+### this causes a failure to compile at heroku
+```
+const { environment } = require('@rails/webpacker')
+
+const webpack = require('webpack')
+environment.plugins.prepend('Provide',
+  new webpack.ProvidePlugin({
+    $: 'jquery/src/jquery',
+    jQuery: 'jquery/src/jquery'
+  })
+)
+
+module.exports = environment
+```
+### Leaving the code at it's default value works just fine,
+### with no issues with the bootstrap implementation
+```
+const { environment } = require('@rails/webpacker')
+const { webpack } = require('webpack')
+
+module.exports = environment
+
+```
