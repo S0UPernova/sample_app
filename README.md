@@ -148,8 +148,8 @@ end
 ```
 ---
 ## From chapter 7 listing 7.2
-### There is an added space after the period in the first instance of the code, which seem to be
-### a typo but later references do not have it
+### There is an added space after the period in the first instance of the code, which seems to be
+### a typo, and later references do not have it
 ```
 /* miscellaneous */
 
@@ -160,25 +160,7 @@ end
   margin-top: 45px;
   @include box_sizing;
 }
-```
-### as you can see
-```
-.debug_dump {
-  •
-  •
-  •
-  @include box_sizing;
-}
-```
-```
-.debug_dump {
-  •
-  •
-  •
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
+
 ```
 ---
 
@@ -205,4 +187,67 @@ const { webpack } = require('webpack')
 
 module.exports = environment
 
+```
+---
+## From chapter 9 listing 9.25
+### Test does not work
+```
+test "login without remembering" do
+    # log in to set the cookie
+    log_in_as(@user, remember_me: '1')
+    # log in again and verify that the cookie is deleted
+    log_in_as(@user, remember_me: '0')
+    assert_nil cookies['remember_token']
+  end
+```
+### the failure message
+```
+ FAIL UsersLoginTest#test_login_without_remembering (5.52s)
+        Expected "" to be nil.
+        test/integration/users_login_test.rb:63:in `block in <class:UsersLoginTest>'
+```
+## listing 9.28 seesm to have the working version
+### it does not mention the difference in "login without remembering",
+### but the version shown does work, unlike the previous example
+
+
+```
+require "test_helper"
+
+class UsersLoginTest < ActionDispatch::IntegrationTest
+  
+  def setup
+    @user = users(:michael)
+  end
+  .
+  .
+  .
+  test "login with remembering" do
+    log_in_as(@user, remember_me: '1')
+    assert_equal FILL_IN, assigns(:user).FILL_IN
+    # assert_not_nil cookies['remember_token']
+  end
+
+  test "login without remembering" do
+    # Log in to set the cookie
+    log_in_as(@user, remember_me: '1')
+    # Log in again and verify that the cookie is deleted
+    log_in_as(@user, remember_me: '0')
+    assert_empty cookies[:remember_token]
+  end
+  .
+  .
+  .
+end
+```
+
+### This version also seems to work without an issue
+```
+test "login without remembering" do
+    # log in to set the cookie
+    log_in_as(@user, remember_me: '1')
+    # log in again and verify that the cookie is deleted
+    log_in_as(@user, remember_me: '0')
+    assert cookies['remember_token'].blank?
+  end
 ```
