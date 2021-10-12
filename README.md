@@ -164,7 +164,7 @@ end
 ```
 ---
 
-## From chapter 8.2 listing 8.20
+## From chapter 8.2, listing 8.20
 ### this causes a failure to compile at heroku
 ```
 const { environment } = require('@rails/webpacker')
@@ -189,7 +189,7 @@ module.exports = environment
 
 ```
 ---
-## From chapter 9 listing 9.25
+## From chapter 9, listing 9.25
 ### Test does not work
 ```
 test "login without remembering" do
@@ -206,7 +206,7 @@ test "login without remembering" do
         Expected "" to be nil.
         test/integration/users_login_test.rb:63:in `block in <class:UsersLoginTest>'
 ```
-## listing 9.28 seesm to have the working version
+## From chapter 9, listing 9.28 seems to have the working version
 ### it does not mention the difference in "login without remembering",
 ### but the version shown does work, unlike the previous example
 
@@ -215,39 +215,87 @@ test "login without remembering" do
 require "test_helper"
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
-  
-  def setup
-    @user = users(:michael)
-  end
-  .
-  .
-  .
-  test "login with remembering" do
-    log_in_as(@user, remember_me: '1')
-    assert_equal FILL_IN, assigns(:user).FILL_IN
-    # assert_not_nil cookies['remember_token']
-  end
-
+.
+.
+.
   test "login without remembering" do
-    # Log in to set the cookie
-    log_in_as(@user, remember_me: '1')
-    # Log in again and verify that the cookie is deleted
-    log_in_as(@user, remember_me: '0')
+    .
+    .
+    .
     assert_empty cookies[:remember_token]
   end
-  .
-  .
-  .
+.
+.
+.
 end
 ```
 
 ### This version also seems to work without an issue
 ```
-test "login without remembering" do
-    # log in to set the cookie
-    log_in_as(@user, remember_me: '1')
-    # log in again and verify that the cookie is deleted
-    log_in_as(@user, remember_me: '0')
+require "test_helper"
+
+class UsersLoginTest < ActionDispatch::IntegrationTest
+.
+.
+.
+  test "login without remembering" do
+    .
+    .
+    .
     assert cookies['remember_token'].blank?
   end
+.
+.
+.
+end
 ```
+---
+## From chapter 10 issue with test for delete exercise
+### non-admin test from listing 10.62
+```
+test "index as non-admin" do
+    log_in_as(@non_admin)
+    get users_path
+    assert_select 'a', text: 'delete', count: 0
+end
+```
+## The exercise asks you to comment out the admin before filter
+## to get the test to go red
+```
+# before_action :admin_user,     only: :destroy
+```
+### But the before action prevents non-admin users from using the delete method
+### it does not prevent the button from showing up
+
+<br>
+
+## Showing links is handled in the partial for showing users
+```
+<li>
+  <%= gravatar_for user, size:50 %>
+  <%= link_to user.name, user %>
+  <% if current_user.admin? && !current_user?(user) %>
+    | <%= link_to "delete", user, method: :delete,
+                                  data: { confirm: "You sure?"} %>
+  <% end %>
+</li>
+```
+### specifically
+```
+current_user.admin?
+```
+
+<br>
+
+## This test seems to cover both
+```
+test "index as non-admin" do
+    log_in_as(@non_admin)
+    get users_path
+    assert_select 'a', text: 'delete', count: 0
+    assert_no_difference 'User.count' do
+      delete user_path(@admin)
+    end
+  end
+```
+---

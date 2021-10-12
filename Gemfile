@@ -22,6 +22,14 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+# For pagination
+gem 'will_paginate', '~> 3.3', '>= 3.3.1'
+# For pagination to use bootstrap styling
+gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.2'
+
+# sample users for sample app
+gem 'faker', '~> 2.19'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
