@@ -270,6 +270,7 @@ end
 <br>
 
 ## Showing links is handled in the partial for showing users
+### This is mentioned in the exercise 
 ```
 <li>
   <%= gravatar_for user, size:50 %>
