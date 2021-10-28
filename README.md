@@ -281,7 +281,7 @@ end
   <% end %>
 </li>
 ```
-### specifically
+### Specifically
 ```
 current_user.admin?
 ```
@@ -299,4 +299,14 @@ test "index as non-admin" do
     end
   end
 ```
+---
+
+<br>
+
+## Chapter 11 Figure 11.6
+### It says that it's the page after a successful activation,
+### but the figure shows a flash for a password reset.
+
+<br>
+
 ---
