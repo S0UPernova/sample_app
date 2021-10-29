@@ -26,6 +26,23 @@ and then migrate the database:
 ```
 $ rails db:migrate
 ```
+---
+For mailers to work you will need to set ENV variables
+
+for all environments
+```
+ENV['EMAIL']
+```
+For production environment
+
+You may need to set up SendGrid, and create an API key for a sender email,
+
+which should be the email you set up in the ENV variable.
+```
+ENV['SENDGRID_API_KEY']
+ENV['PRODUCTION_URL']
+```
+---
 Finally, run the test suite to verify that everything is working correctly:
 ```
 $ rails test
@@ -309,4 +326,129 @@ test "index as non-admin" do
 
 <br>
 
+---
+## From Chapter 11
+### some of the code in this section is a bit off
+
+<br>
+
+### For one without being able to verify the domain
+you need to set up single sender, which means you need to use that  sender email,
+
+as the default from email, and to do that without exposing the email in the source
+
+requires a ENV variable, from a local YAML file added to the .gitignore, or from the terminal,
+
+and on the webhost
+
+mailers/aplication_mailer.rb
+```
+class ApplicationMailer < ActionMailer::Base
+  default from: ENV['EMAIL']
+  layout 'mailer'
+end
+```
+### I used a YAML file added to .gitignore and accessed it with this next snippet
+config/application.rb
+```
+module SampleApp
+  class Application < Rails::Application
+    .
+    .
+    .
+    #Version of your assets, change this is you want to expire all your assets
+    config.assets.version = '1.0'
+    config.before_configuration do
+      env_file = File.join(Rails.root, 'config', 'local_env.yml')
+      YAML.load(File.open(env_file)).each do |key, value|
+        ENV[key.to_s] = value.to_s
+      end if File.exists?(env_file)
+    end
+  end
+end
+```
+config/local_env.yml
+```F
+EMAIL: "YOUR_SENDER_EMAIL"
+```
+
+<br>
+
+### The method in the book does not seem to work anymore.
+config/environments/production.rb
+```
+require "active_support/core_ext/integer/time"
+
+Rails.application.configure do
+.
+.
+.
+  host = 'YOUR_APP_URL'
+  config.action_mailer.default_url_options = { host: host }
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+  }
+.
+.
+.
+end
+```
+
+### The current way to use SendGrid seems to be with an API key,
+### but the port they list in code snippets I found does not seem to work
+config/environments/production.rb
+```
+require "active_support/core_ext/integer/time"
+
+Rails.application.configure do
+.
+.
+.
+  host = 'YOUR_APP_URL'
+  config.action_mailer.default_url_options = { host: host }
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '465',
+    :authentication => :plain,
+    :user_name      => 'apikey',
+    :password       => ENV['SENDGRID_API_KEY'],
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+  }
+.
+.
+.
+end
+```
+### What ended up working is a hybrid using an API key, and port 587
+config/environments/production.rb
+```
+require "active_support/core_ext/integer/time"
+
+Rails.application.configure do
+.
+.
+.
+  host = 'YOUR_APP_URL'
+  config.action_mailer.default_url_options = { host: host }
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => 'apikey',
+    :password       => ENV['SENDGRID_API_KEY'],
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
+  }
+.
+.
+.
+end
+```
 ---

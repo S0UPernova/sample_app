@@ -70,7 +70,7 @@ Rails.application.configure do
 
   # Configuration for mailers
   config.action_mailer.delivery_method = :smtp
-  host = 'https://obscure-sample-app.herokuapp.com'
+  host = ENV['PRODUCTION_URL']
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
