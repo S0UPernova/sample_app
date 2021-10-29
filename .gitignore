@@ -41,3 +41,4 @@ yarn-debug.log*
 
 # Ignore db test files.
 /db/test.*
+config/local_env.yml
