@@ -33,15 +33,35 @@ for all environments
 ```
 ENV['EMAIL']
 ```
-For production environment
+The application.rb is set up to look for local_env.yml in the config folder for ENV variables,
+which I also have added to the gitignore, if you use this too make sure it is ignored for you aswell.
 
+alterinively you could set up the ENV variable in your shell, which is probably the better method, but I found this to be easier for me.
+
+---
+For the production environment
+-
 You may need to set up SendGrid, and create an API key for a sender email,
+which should be the email used when you set up the email ENV variable.
 
-which should be the email you set up in the ENV variable.
+Production ENV Variables
 ```
 ENV['SENDGRID_API_KEY']
 ENV['PRODUCTION_URL']
 ```
+if you are using heroku you can use the command line to set up these variables.
+```
+$ heroku config:set variable_name=variable_value
+```
+to check the value of a variable.
+```
+$ heroku config:get variable_name
+```
+and to unset it
+```
+$ heroku config:unset variable_name
+```
+
 ---
 Finally, run the test suite to verify that everything is working correctly:
 ```
