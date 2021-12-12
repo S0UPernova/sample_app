@@ -1,14 +1,5 @@
-<div class="card center">
-  <div class="card-body">
-    <h1 class="card-title">Welcome to the Sample App</h1>
-    <h2 class="card-text">
-      This is the home page for the
-      <a href="https://www.railstutorial.org/" target="_blank">Ruby on Rails Tutorial</a>
-      sample application.
-    </h2>
-    <%= link_to "Sign up now!", signup_path, class: 'btn btn-lg btn-primary' %>
-  </div>
-</div>
-<%= link_to image_tag("rails.svg", alt: "Rails logo", width: "200"),
-                        "https://rubyonrails.org/", target: "_blank"  %>
-<%#= image_tag("kitten.jpg", alt: "An obligatory cat pic") %>
+<% if logged_in? %>
+  <%= render 'shared/home_logged_in' %>
+<% else %>
+  <%= render 'shared/home_not_logged_in' %>
+<% end %>

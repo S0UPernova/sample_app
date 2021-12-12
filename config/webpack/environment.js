@@ -7,12 +7,12 @@ const { webpack } = require('webpack')
 // update it is in the book, but it causes it to fail on compile at heroku
 
 
-// const webpack = require('webpack')
-// environment.plugins.prepend('Provide',
-//   new webpack.ProvidePlugin({
-//     $: 'jquery/src/jquery',
-//     jQuery: 'jquery/src/jquery'
-//   })
-// )
+const webpack = require('webpack')
+environment.plugins.prepend('Provide',
+  new webpack.ProvidePlugin({
+    $: 'jquery/src/jquery',
+    jQuery: 'jquery/src/jquery'
+  })
+)
 
 module.exports = environment

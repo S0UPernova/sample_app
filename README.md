@@ -471,4 +471,10 @@ Rails.application.configure do
 .
 end
 ```
+
+---
+## From chapter 12 figure 12.15
+The image is supposed to be of a successful password reset in production,
+but it is showing a flash for a successful account activation instead.
+
 ---
