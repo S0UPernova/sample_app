@@ -171,6 +171,25 @@ aside {
   margin-top: 15px;
 }
 
+// Pagination nav
+.pagination {
+  border: 1px solid black;
+  border-radius: .5rem;
+  display: inline-flex;
+  // gap: 1rem;
+  :nth-child(even), :nth-child(odd) {
+    font-size: 2rem;
+    padding: 1rem 2rem;
+    text-decoration: none;
+  }
+  :nth-child(even), :nth-child(odd):not(:first-child) {
+    border-left: 1px solid black;
+  }
+  .current {
+    color: white;
+    background-color: #888;
+  }
+}
 // Forms
 
 input, textarea, select, .uneditable-input {

@@ -12,7 +12,7 @@ is available jointly under the MIT License and the Beerware License. See
 [LICENSE.md](LICENSE.md) for details.
 
 ## Getting started
-To get started with the app, clone the repo and then install the needed gems:
+To get started with the app, clone the repo and then install the needed gems.
 ___
  If you are using bundler 3 or newer
 ```
@@ -26,10 +26,32 @@ and then migrate the database:
 ```
 $ rails db:migrate
 ```
+
+
+
+
 ---
+## Development environment
+first make sure you have yarn installed
+```
+$ yarn --version
+```
+Then have yarn install dependencies with
+```
+$ yarn install
+```
+And second you will need imagemagick to install on linux use
+```
+$ sudo apt-get -y install imagemagick
+```
+---
+
+
+
+
 For mailers to work you will need to set ENV variables
 
-for all environments
+for all environments.
 ```
 ENV['EMAIL']
 ```
@@ -44,10 +66,18 @@ For the production environment
 You may need to set up SendGrid, and create an API key for a sender email,
 which should be the email used when you set up the email ENV variable.
 
-Production ENV Variables
+### Production ENV Variables
+Mailers
 ```
 ENV['SENDGRID_API_KEY']
 ENV['PRODUCTION_URL']
+```
+AWS S3 storage solution for micropost images
+```
+ENV['AWS_ACCESS_KEY_ID']
+ENV['AWS_SECRET_ACCESS_KEY']
+ENV['AWS_REGION']
+ENV['AWS_BUCKET']
 ```
 if you are using heroku you can use the command line to set up these variables.
 ```
@@ -63,11 +93,13 @@ $ heroku config:unset variable_name
 ```
 
 ---
-Finally, run the test suite to verify that everything is working correctly:
+## Finally run the tests and fire it up.
+Run the test suite.
+
 ```
 $ rails test
 ```
-If the test suite passes, you'll be ready to run the app in a local Server:
+If the test suite passes, you'll be ready to run the app in a local Server.
 ```
 $ rails server
 ```
@@ -88,7 +120,7 @@ def hello
     render text: "hello, world!"
 end
 ```
-so I used this insted  
+so I used this instead  
 -
 ```
 def hello
@@ -477,4 +509,43 @@ end
 The image is supposed to be of a successful password reset in production,
 but it is showing a flash for a successful account activation instead.
 
+---
+
+## From chapter 13 listing 13.51
+This does not work, and seems to be missing an equals sign
+```
+.
+.
+.
+  def create
+    .
+    .
+    .
+    else
+      @feed_items current_user.feed.paginate(page: params[:page])
+      render 'static_pages/home'
+    end
+  end
+.
+.
+.
+```
+With the equals sign it seems to work
+```
+.
+.
+.
+  def create
+    .
+    .
+    .
+    else
+      @feed_items = current_user.feed.paginate(page: params[:page])
+      render 'static_pages/home'
+    end
+  end
+.
+.
+.
+```
 ---

@@ -5,6 +5,13 @@ ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
+
+# micropost image sizing, and processing addons
+gem 'image_processing', '~> 1.12', '>= 1.12.1'
+gem 'mini_magick', '~> 4.11'
+# Adds validations for active storage, to limit file types and sizes
+gem 'active_storage_validations', '~> 0.9.6'
+
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -25,7 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 # bootstrap dependencies
 # gem 'popper_js', '~> 2.9', '>= 2.9.3'
-# gem 'jquery-rails', '~> 4.4'
+gem 'jquery-rails', '~> 4.4'
 
 # For pagination
 gem 'will_paginate', '~> 3.3', '>= 3.3.1'
@@ -79,6 +86,8 @@ end
 
 group :production do
   gem 'pg'
+  # Web storage service
+  gem 'aws-sdk-s3', '~> 1.110', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

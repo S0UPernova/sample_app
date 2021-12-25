@@ -1,14 +1,24 @@
 {
-  "application.js": "/packs-test/js/application-6bdae97d3e2f63464eae.js",
-  "application.js.map": "/packs-test/js/application-6bdae97d3e2f63464eae.js.map",
+  "application.js": "/packs-test/js/application-da7a0a7054d980740b3d.js",
+  "application.js.map": "/packs-test/js/application-da7a0a7054d980740b3d.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs-test/js/application-6bdae97d3e2f63464eae.js"
+        "/packs-test/js/application-da7a0a7054d980740b3d.js"
       ],
       "js.map": [
-        "/packs-test/js/application-6bdae97d3e2f63464eae.js.map"
+        "/packs-test/js/application-da7a0a7054d980740b3d.js.map"
+      ]
+    },
+    "imageUploadSizeRestriction": {
+      "js": [
+        "/packs-test/js/imageUploadSizeRestriction-89161636b64d98c26ff7.js"
+      ],
+      "js.map": [
+        "/packs-test/js/imageUploadSizeRestriction-89161636b64d98c26ff7.js.map"
       ]
     }
-  }
+  },
+  "imageUploadSizeRestriction.js": "/packs-test/js/imageUploadSizeRestriction-89161636b64d98c26ff7.js",
+  "imageUploadSizeRestriction.js.map": "/packs-test/js/imageUploadSizeRestriction-89161636b64d98c26ff7.js.map"
 }
