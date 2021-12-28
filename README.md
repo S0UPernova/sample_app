@@ -18,14 +18,19 @@ is available jointly under the MIT License and the Beerware License. See
 To get started with the app, clone the repo and then install the needed gems.
 ___
  If you are using bundler 3 or newer
+ 
 ```
 $ bundle config set without 'production'
 ```
+
 Next,
+
 ```
 $ bundle install
 ```
+
 and then migrate the database:
+
 ```
 $ rails db:migrate
 ```
@@ -36,14 +41,19 @@ $ rails db:migrate
 ---
 ### Development environment
 first make sure you have yarn installed
+
 ```
 $ yarn --version
 ```
+
 Then have yarn install dependencies with
+
 ```
 $ yarn install
 ```
+
 You will also need imagemagick, to install on linux use
+
 ```
 $ sudo apt-get -y install imagemagick
 ```
@@ -73,11 +83,14 @@ which should be the same email used in the email ENV variable.
 <br>
 
 Email service provider: SendGrid
+
 ```
 ENV['SENDGRID_API_KEY']
 ENV['PRODUCTION_URL']
 ```
+
 Storage solution: AWS S3
+
 ```
 ENV['AWS_ACCESS_KEY_ID']
 ENV['AWS_SECRET_ACCESS_KEY']
@@ -88,14 +101,19 @@ ENV['AWS_BUCKET']
 <br>
 
 If you are using heroku you can use the command line to set up these variables.
+
 ```
 $ heroku config:set variable_name=variable_value
 ```
+
 To check the value of an existing variable use.
+
 ```
 $ heroku config:get variable_name
 ```
+
 To unset an existing variable use
+
 ```
 $ heroku config:unset variable_name
 ```
@@ -107,16 +125,19 @@ Run the test suite.
 ```
 $ rails test
 ```
+
 If the test suite passes, you'll be ready to run the app in a local Server.
+
 ```
 $ rails server
 ```
+
 For more information, see the
 [*Ruby on Rails Turtorial* book](https://www.railstutorial.org/book)
 
-___
-## Some added bits
-some issues I found while working through this book
+---
+
+## The rest is typos and other issues I found while working through this book.
 
 ---
 
@@ -128,6 +149,7 @@ def hello
     render text: "hello, world!"
 end
 ```
+
 so I used this instead  
 
 ```
@@ -136,8 +158,10 @@ def hello
 end
 ```
 ---
+
 ### From chapter 3.3, Listing 3.15.
 These commands do not seem to run the tests.
+
 ```
 $ rails db:migrate 
 $ rails test
@@ -192,19 +216,24 @@ Finished in 0.599964s, 3.3335 runs/s, 3.3335 assertions/s.
 ```
 ---
 
-
 ### From chapter 5 listing 5.4
 This command does not work because the link is no longer correct
+
 ```
 $ curl -o app/assets/images/kitten.jpg -OL https://cdn.lernenough.com/kitten.jpg
 ```
+
 This is with the current address as of 09/14/21
+
 ```
 $ curl -o app/assets/images/kitten.jpg -OL https://learnenough.s3-us-west-2.amazonaws.com/kitten.jpg
 ```
+
 ---
+
 ### From chapter 3.3, Listing 6.27
 Missing curly brackets on email uniqueness.
+
 ```
 class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50}
@@ -214,7 +243,9 @@ class User < ApplicationRecord
                     uniqueness: case_sensitive: false
 end
 ```
+
 This is what actually works
+
 ```
 class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50}
@@ -224,10 +255,12 @@ class User < ApplicationRecord
                     uniqueness: {case_sensitive: false}
 end
 ```
+
 ---
 ### From chapter 7 listing 7.2
 There is an added space after the period in the first instance of the code,
 which seems to be a typo, and later references do not have it
+
 ```
 /* miscellaneous */
 
@@ -240,10 +273,12 @@ which seems to be a typo, and later references do not have it
 }
 
 ```
+
 ---
 
 ### From chapter 8.2, listing 8.20
 this seems to causes a failure to compile at heroku
+
 ```
 const { environment } = require('@rails/webpacker')
 
@@ -257,7 +292,9 @@ environment.plugins.prepend('Provide',
 
 module.exports = environment
 ```
+
 This seems to work fine with no issues with the bootstrap implementation
+
 ```
 const { environment } = require('@rails/webpacker')
 const { webpack } = require('webpack')
@@ -265,9 +302,12 @@ const { webpack } = require('webpack')
 module.exports = environment
 
 ```
+
 ---
+
 ### From chapter 9, listing 9.25
 Test does not work
+
 ```
 test "login without remembering" do
     # log in to set the cookie
@@ -277,12 +317,15 @@ test "login without remembering" do
     assert_nil cookies['remember_token']
   end
 ```
+
 the failure message
+
 ```
  FAIL UsersLoginTest#test_login_without_remembering (5.52s)
         Expected "" to be nil.
         test/integration/users_login_test.rb:63:in `block in <class:UsersLoginTest>'
 ```
+
 Chapter 9, listing 9.28 seems to have the working version,
 it does not mention the difference in "login without remembering",
 but the version shown does work, unlike the previous example
@@ -304,6 +347,7 @@ but the version shown does work, unlike the previous example
 ```
 
 This version also seems to work without an issue
+
 ```
 .
 .
@@ -318,9 +362,12 @@ This version also seems to work without an issue
 .
 .
 ```
+
 ---
+
 ### From chapter 10 issue with test for delete exercise
 non-admin test from listing 10.62
+
 ```
 test "index as non-admin" do
     log_in_as(@non_admin)
@@ -328,11 +375,14 @@ test "index as non-admin" do
     assert_select 'a', text: 'delete', count: 0
 end
 ```
+
 The exercise asks you to comment out the admin before filter
 to get the test to go red
+
 ```
 # before_action :admin_user,     only: :destroy
 ```
+
 The before action prevents non-admin users from using the delete method,
 but it does not prevent the button from showing up
 
@@ -340,6 +390,7 @@ but it does not prevent the button from showing up
 
 Showing links is handled in the partial for showing users.
 (This is mentioned in the exercise, but I think that this was misleading.)
+
 ```
 <li>
   <%= gravatar_for user, size:50 %>
@@ -349,8 +400,11 @@ Showing links is handled in the partial for showing users.
                                   data: { confirm: "You sure?"} %>
   <% end %>
 </li>
+
 ```
+
 Specifically
+
 ```
 current_user.admin?
 ```
@@ -358,6 +412,7 @@ current_user.admin?
 <br>
 
 ### This test seems to cover both
+
 ```
 test "index as non-admin" do
     log_in_as(@non_admin)
@@ -368,6 +423,7 @@ test "index as non-admin" do
     end
   end
 ```
+
 ---
 
 <br>
@@ -379,6 +435,7 @@ but the figure shows a flash for a password reset.
 <br>
 
 ---
+
 ### From Chapter 11
 Some of the code in this section is a bit off
 
@@ -394,14 +451,17 @@ requires a ENV variable, local, and you will have to set it up on your webhost a
 Here is the code I used in the mailer for this.
 
 mailers/aplication_mailer.rb
+
 ```
 class ApplicationMailer < ActionMailer::Base
   default from: ENV['EMAIL']
   layout 'mailer'
 end
 ```
+
 I used a YAML file added to .gitignore and accessed it with this next snippet, but using your shell for this would probably be better
 config/application.rb
+
 ```
 module SampleApp
   class Application < Rails::Application
@@ -419,8 +479,10 @@ module SampleApp
   end
 end
 ```
+
 config/local_env.yml
-```F
+
+```
 EMAIL: "YOUR_SENDER_EMAIL"
 ```
 
@@ -429,6 +491,7 @@ EMAIL: "YOUR_SENDER_EMAIL"
 #### Setting up the production environment with the SendGrid API.
 The method in the book does not seem to work anymore.
 config/environments/production.rb
+
 ```
 require "active_support/core_ext/integer/time"
 
@@ -457,6 +520,7 @@ The current way to use SendGrid is to use an API key,
  although the port they list in the documentation I found does not seem to work
 
 config/environments/production.rb
+
 ```
 require "active_support/core_ext/integer/time"
 
@@ -480,8 +544,11 @@ Rails.application.configure do
 .
 end
 ```
+
 What ended up working is a hybrid using an API key, and port 587
+
 config/environments/production.rb
+
 ```
 require "active_support/core_ext/integer/time"
 
@@ -515,6 +582,7 @@ but it is showing a flash for a successful account activation instead.
 
 ### From chapter 13 listing 13.51
 This does not work, and seems to be missing an equals sign
+
 ```
 .
 .
@@ -532,7 +600,9 @@ This does not work, and seems to be missing an equals sign
 .
 .
 ```
+
 With the equals sign it seems to work
+
 ```
 .
 .
@@ -550,19 +620,24 @@ With the equals sign it seems to work
 .
 .
 ```
+
 ---
+
 ### From chapter 14 listing 14.35 & 14.36
 
 the code seems to be slightly off in the book
 
 follow
+
 ```
 <%= form_for(model: current_user.active_relationships.build, remote: true) do |f| %>
   <div><%= hidden_field_tag :followed_id, @user.id %></div>
   <%= f.submit "Follow", class: "btn btn-primary" %>
 <% end %>
 ```
+
 unfollow
+
 ```
 <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id),
               html: { method: :delete }, remote: true) do |f| %>
@@ -575,16 +650,26 @@ I found that using "form_for" and omiting "model:" for both did the trick
 Here is what I used
 
 follow
+
 ```
 <%= form_for(current_user.active_relationships.build, remote: true) do |f| %>
   <div><%= hidden_field_tag :followed_id, @user.id %></div>
   <%= f.submit "Follow", class: "btn btn-primary" %>
 <% end %>
 ```
+
 unfollow
+
 ```
 <%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
               html: { method: :delete }, remote: true) do |f| %>
   <%= f.submit "Unfollow", class: "btn" %>
 <% end %>
 ```
+---
+
+If someone is reading this I'd like to mention that I never removed the hello action,
+so you could still visit it.
+
+Local: localhost:3000/hello
+Hosted: http://obscure-sample-app.herokuapp.com/hello

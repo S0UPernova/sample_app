@@ -26,12 +26,8 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-
 # adds bootstrap for styling
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
-# bootstrap dependencies
-# gem 'popper_js', '~> 2.9', '>= 2.9.3'
-# gem 'jquery-rails', '~> 4.4'
 
 # For pagination
 gem 'will_paginate', '~> 3.3', '>= 3.3.1'
@@ -46,6 +42,9 @@ gem 'faker', '~> 2.19'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+
+# Adds markdown for help page
+gem 'redcarpet', '~> 3.5', '>= 3.5.1'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

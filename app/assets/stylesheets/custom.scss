@@ -194,7 +194,7 @@ aside {
   }
 }
 
-.yser_avatars {
+.user_avatars {
   overflow: auto;
   margin-top: 10px;
   .gravatar {
@@ -319,5 +319,12 @@ span.image {
   margin-top: 10px;
   input {
     border: 0;
+  }
+}
+
+#readme {
+  h2 {
+    font-size: 2em;
+    color: black;
   }
 }

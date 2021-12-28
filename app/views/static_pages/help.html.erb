@@ -1,3 +1,8 @@
 <% provide(:title, "Help") %>
-<h1>StaticPages#help</h1>
-<p>Find me in app/views/static_pages/help.html.erb</p>
+<h1>Apon finishing the book I realized that this page was still blank, so I added the README to it</h1>
+<br>
+<br>
+<br>
+<div id="readme">
+  <%= markdown(render file: "#{Rails.root}/README.md") %>
+</div>

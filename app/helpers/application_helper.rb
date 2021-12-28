@@ -8,4 +8,9 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
+
+  def markdown(text)
+    options = [:hard_wrap, :autolink, :fenced_code_blocks]
+    Markdown.new(text, *options).to_html.html_safe
+  end
 end
