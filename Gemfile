@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.2'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 
@@ -32,7 +31,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 # bootstrap dependencies
 # gem 'popper_js', '~> 2.9', '>= 2.9.3'
-gem 'jquery-rails', '~> 4.4'
+# gem 'jquery-rails', '~> 4.4'
 
 # For pagination
 gem 'will_paginate', '~> 3.3', '>= 3.3.1'

@@ -17,15 +17,21 @@ module SampleApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
-
+    
     #Version of your assets, change this is you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # include the authenticity token in remote forms
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+    
+    # Looks for a config file which I use for ENV["EMAIL"] in mailers
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
       YAML.load(File.open(env_file)).each do |key, value|
         ENV[key.to_s] = value.to_s
       end if File.exists?(env_file)
     end
+
+    
   end
 end
